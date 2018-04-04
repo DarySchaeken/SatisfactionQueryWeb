@@ -14,7 +14,8 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    You are logged in! <br/>
+                        <a href="{{ url('/locations') }}">Go to locations page</a>
                 </div>
             </div>
         </div>
