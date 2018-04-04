@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/locations', function(){
+    $locations = \App\Location::all();
+    return view('locations', ['locations' => $locations]);
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/add-location', 'LocationController@index');
