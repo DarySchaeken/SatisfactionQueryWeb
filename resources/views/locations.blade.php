@@ -12,7 +12,7 @@
                 </tr>
                 @auth
                     <tr>
-                        <td>0</td>
+                        <td></td>
                         <td><a href="{{url ('/locations/create')}}">Add location</a></td>
                     </tr>
                 @endauth
@@ -20,6 +20,21 @@
                     <tr>
                         <td>{{$location->id}}</td>
                         <td>{{$location->name}}</td>
+                        @auth
+                        <td>
+                            <form action="{{route ('locations.edit',[$location->id])}}" method="get">
+                                {!! csrf_field() !!}
+                                <button type="submit" class="btn-primary">Modify</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{{route ('locations.destroy',[$location->id])}}" method="post">
+                                {!! csrf_field() !!}
+                                {{ method_field('delete') }}
+                                <button type="submit" class="btn-danger">DELETE</button>
+                            </form>
+                        </td>
+                        @endauth
                     </tr>
                 @endforeach
             </table>

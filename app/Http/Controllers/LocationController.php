@@ -38,7 +38,7 @@ class LocationController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate(['name' => 'required']);
-        $location = new \App\Location($data);
+        $location = new Location($data);
         $location->save();
         return LocationController::index();
     }
@@ -62,7 +62,8 @@ class LocationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $location = Location::find($id);
+        return view("edit-location", ['location' => $location]);
     }
 
     /**
@@ -74,7 +75,10 @@ class LocationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $location = Location::find($id);
+        $location->name = $request['name'];
+        $location->save();
+        return LocationController::index();
     }
 
     /**
@@ -85,6 +89,8 @@ class LocationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $location = Location::find($id);
+        $location->delete();
+        return LocationController::index();
     }
 }
