@@ -15,7 +15,15 @@
                     <input type="text" class="form-control" id="name" name="name" value="{{ $location->name }}">
                     <button type="submit">Submit</button>
                 </form>
+
             </div>
+        <div class="row">
+            <form method="post" action="{{route('ratings.destroy', [$location->id])}}">
+                {{ csrf_field() }}
+                {{ method_field('PUT') }}
+                <button type="submit" class="btn-danger">Delete all for this location</button>
+            </form>
+        </div>
             @endguest
     </div>
 @endsection
