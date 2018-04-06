@@ -20,9 +20,23 @@
         <div class="row">
             <form method="post" action="{{route('ratings.destroy', [$location->id])}}">
                 {{ csrf_field() }}
-                {{ method_field('PUT') }}
+                {{ method_field('delete') }}
                 <button type="submit" class="btn-danger">Delete all for this location</button>
             </form>
+        </div>
+        <div class="row">
+            <table>
+                <tr>
+                    <th>Comment</th>
+                    <th>Score</th>
+                </tr>
+                @foreach($ratings as $rating)
+                    <tr>
+                        <td>{{$rating->comment}}</td>
+                        <td>{{$rating->score}}</td>
+                    </tr>
+                    @endforeach
+            </table>
         </div>
             @endguest
     </div>

@@ -21,4 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('locations', 'LocationController');
 
-Route::resource('ratings', 'RatingController');
+Route::get('/ratings/add/{location}', ['uses' => 'RatingController@create'])->name('ratings.create');
+
+Route::post('/ratings', ['uses' => 'RatingController@store'])->name('ratings');
+
+Route::delete('/ratings', ['uses' => 'RatingController@destroy'])->name('ratings.destroy');

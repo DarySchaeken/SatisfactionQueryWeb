@@ -20,28 +20,33 @@ class RatingController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($location_id)
     {
-        //
+        $location = \App\Location::find($location_id);
+        return view("add-rating", ['location' => $location]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate(['score' => 'required', 'comment' => 'required', 'location_id' => 'required']);
+        $rating = new \App\Rating($data);
+        $rating->save();
+        return redirect('locations');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -52,7 +57,7 @@ class RatingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -63,8 +68,8 @@ class RatingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -75,13 +80,13 @@ class RatingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $ratings = Rating::all()->where('location_id', $id);
-        foreach ($ratings as $rating){
+        foreach ($ratings as $rating) {
             $rating->delete();
         }
         redirect(route('locations.edit', [$id]));

@@ -34,6 +34,12 @@
                                 <button type="submit" class="btn-danger">DELETE</button>
                             </form>
                         </td>
+                        @else
+                            <td>
+                                <form action="{{route('ratings.create',array($location->id))}}" method="get">
+                                    <button type="submit" class="btn-primary">New rating</button>
+                                </form>
+                            </td>
                         @endauth
                     </tr>
                 @endforeach
