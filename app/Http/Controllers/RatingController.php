@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Rating;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RatingController extends Controller
 {
@@ -40,7 +42,7 @@ class RatingController extends Controller
         $data = $request->validate(['score' => 'required', 'comment' => 'required', 'location_id' => 'required']);
         $rating = new \App\Rating($data);
         $rating->save();
-        return redirect('locations');
+        return redirect('locations') -> with('token',$rating->updated_at);
     }
 
     /**
@@ -57,12 +59,18 @@ class RatingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $token = $_GET['token'];
+        $rating = Rating::all()->where('updated_at', $token)->first();
+        if($rating == null){
+            return view('token-not-found');
+        } else {
+            $location = \App\Location::find($rating->location_id);
+            return view('edit-rating',['rating' => $rating, 'location' => $location]);
+        }
     }
 
     /**
@@ -74,7 +82,13 @@ class RatingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        var_dump($request);
+        var_dump($id);
+        $rating = Rating::find($id);
+        $rating->comment = $request['comment'];
+        $rating->score = $request['score'];
+        $rating->save();
+        return redirect('locations') -> with('token',$rating->updated_at);
     }
 
     /**
@@ -89,6 +103,18 @@ class RatingController extends Controller
         foreach ($ratings as $rating) {
             $rating->delete();
         }
-        redirect(route('locations.edit', [$id]));
+        return redirect()->route('locations.edit', [$id]);
+    }
+
+    public function destroy_id($id)
+    {
+      $rating = Rating::find($id);
+      $loc_id = $rating->location_id;
+      $rating->delete();
+      if(Auth::check()){
+          return redirect()->route('locations.edit', [$loc_id]);
+      } else {
+          return redirect('locations');
+      }
     }
 }

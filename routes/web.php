@@ -25,4 +25,10 @@ Route::get('/ratings/add/{location}', ['uses' => 'RatingController@create'])->na
 
 Route::post('/ratings', ['uses' => 'RatingController@store'])->name('ratings');
 
-Route::delete('/ratings', ['uses' => 'RatingController@destroy'])->name('ratings.destroy');
+Route::delete('/ratings/destroy_all/{location_id}', ['uses' => 'RatingController@destroy'])->name('ratings.destroy');
+
+Route::delete('/ratings/destroy_id/{rating_id}', ['uses' => 'RatingController@destroy_id'])->name('ratings.destroy_id');
+
+Route::get('/ratings/edit', ['uses' => 'RatingController@edit'])->name('ratings.edit');
+
+Route::put('/ratings/update/{rating_id}', ['uses' => 'RatingController@update'])->name('ratings.update');

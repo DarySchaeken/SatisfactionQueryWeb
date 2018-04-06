@@ -4,6 +4,11 @@
         <div class="row">
             <h1>Locations</h1>
         </div>
+        @if (session('token'))
+            <div class="row">
+                <p>Your token is {{ session('token') }}</p>
+            </div>
+        @endif
         <div class="row">
             <table>
                 <tr>
@@ -44,6 +49,16 @@
                     </tr>
                 @endforeach
             </table>
+        </div>
+        <br/>
+        <div class="row">
+            <h3>Edit previous rating?</h3>
+        </div>
+        <div class="row">
+            <form action="{{route ('ratings.edit') }}" method="get">
+                <input type="text" name="token" placeholder="token"/>
+                <button type="submit" class="btn-primary">Edit</button>
+            </form>
         </div>
     </div>
 @endsection
