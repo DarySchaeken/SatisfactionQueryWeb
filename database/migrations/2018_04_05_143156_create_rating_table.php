@@ -18,6 +18,7 @@ class CreateRatingTable extends Migration
             $table->integer('score');
             $table->string('comment');
             $table->unsignedInteger('location_id');
+            $table->string('token');
             $table->timestamps();
 
             $table->foreign('location_id')->references('id')->on('locations');

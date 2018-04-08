@@ -41,8 +41,9 @@ class RatingController extends Controller
     {
         $data = $request->validate(['score' => 'required', 'comment' => 'required', 'location_id' => 'required']);
         $rating = new \App\Rating($data);
+        $rating->token = uniqid(true);
         $rating->save();
-        return redirect('locations') -> with('token',$rating->updated_at);
+        return redirect('locations') -> with('token',$rating->token);
     }
 
     /**
@@ -64,7 +65,7 @@ class RatingController extends Controller
     public function edit()
     {
         $token = $_GET['token'];
-        $rating = Rating::all()->where('updated_at', $token)->first();
+        $rating = Rating::all()->where('token', $token)->first();
         if($rating == null){
             return view('token-not-found');
         } else {
@@ -82,13 +83,11 @@ class RatingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        var_dump($request);
-        var_dump($id);
         $rating = Rating::find($id);
         $rating->comment = $request['comment'];
         $rating->score = $request['score'];
         $rating->save();
-        return redirect('locations') -> with('token',$rating->updated_at);
+        return redirect('locations') -> with('token',$rating->token);
     }
 
     /**

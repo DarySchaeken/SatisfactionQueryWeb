@@ -9,18 +9,19 @@
                 <p>Your token is {{ session('token') }}</p>
             </div>
         @endif
+        <div>
+            @auth
+            <form action="{{route ('locations.create')}}" method="get">
+                <button type="submit" class="btn-primary">Add Location</button>
+            </form>
+            @endauth
+        </div>
         <div class="row">
             <table>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
                 </tr>
-                @auth
-                    <tr>
-                        <td></td>
-                        <td><a href="{{url ('/locations/create')}}">Add location</a></td>
-                    </tr>
-                @endauth
                 @foreach($locations as $location)
                     <tr>
                         <td>{{$location->id}}</td>
@@ -51,6 +52,7 @@
             </table>
         </div>
         <br/>
+        @guest
         <div class="row">
             <h3>Edit previous rating?</h3>
         </div>
@@ -60,5 +62,6 @@
                 <button type="submit" class="btn-primary">Edit</button>
             </form>
         </div>
+        @endguest
     </div>
 @endsection
