@@ -17,57 +17,65 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
+    <!-- Font awesome style -->
+    <link href="{{ asset('fontawesome/fontawesome-4.5.0/css/fontawesome-all.min.css') }}" rel="stylesheet"
+          type="text/css">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('Satisfaction Query', 'Satisfaction Query') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<div id="app">
+    <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('Satisfaction Query', 'Satisfaction Query') }}
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
 
-                    </ul>
+                </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li>
-                                <a style="float: right; display: block" class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                <a style="float: right; display: block" class="nav-link" href="{{ route('locations.index') }}">Locations</a>
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a style="float: right; display: block" class="nav-link" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li>
+                            <a style="float: right; display: block" class="nav-link"
+                               href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a style="float: right; display: block" class="nav-link"
+                               href="{{ route('locations.index') }}">Locations</a>
+                        </li>
+                    @else
+                        <li class="nav-item dropdown">
+                            <a style="float: right; display: block" class="nav-link" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                                <a style="float: right; display: block" class="nav-link" href="{{ route('locations.index') }}">Locations</a>
+                                {{ __('Logout') }}
+                            </a>
+                            <a style="float: right; display: block" class="nav-link"
+                               href="{{ route('locations.index') }}">Locations</a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
 
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                        </li>
+                    @endguest
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    <main class="py-4">
+        @yield('content')
+    </main>
+</div>
 </body>
 </html>

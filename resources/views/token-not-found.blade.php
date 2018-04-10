@@ -1,14 +1,23 @@
 @extends('layouts.app')
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Dashboard</div>
+                    <div class="card-header">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        Dashboard
+                    </div>
 
                     <div class="card-body">
-                        <p>Token not found!</p><br/>
-                        <a href="{{ url('/locations') }}">Go to locations page</a>
+                        <p>
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            Token not found!
+                        </p>
+                        <a href="{{ url('/locations') }}" class="btn btn-primary" role="button">
+                            Go to locations page
+                        </a>
                     </div>
                 </div>
             </div>
