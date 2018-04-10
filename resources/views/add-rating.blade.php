@@ -17,16 +17,22 @@
                             <div class="row">
                                 <form method="post" action="{{ route('ratings') }}">
                                     {{ csrf_field() }}
-                                    <label for="score">Rating:</label>
-                                    <br/>
-                                    @for($i = 1; $i<=10;$i++)
-                                        <label class="radio-inline"><input type="radio" name="score" id="score" value="{{$i}}">{{$i}}</label>
-                                    @endfor
-                                    <br/>
-                                    <label for="comment">Comment:</label>
-                                    <br/>
-                                    <textarea class="form-control" id="comment" name="comment" placeholder="comment"></textarea>
-                                    <br/>
+
+                                    <div class="form-group">
+                                        <label for="score">Rating:</label>
+                                        <br/>
+                                        @for($i = 1; $i<=10;$i++)
+                                            <label class="radio-inline"><input type="radio" name="score" id="score"
+                                                                               value="{{$i}}">{{$i}}</label>
+                                        @endfor
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="comment">Comment:</label>
+                                        <textarea class="form-control" id="comment" name="comment"
+                                                  placeholder="comment"></textarea>
+                                    </div>
+                                    
                                     <input type="hidden" id="location_id" name="location_id" value="{{$location->id}}"/>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>

@@ -16,9 +16,12 @@
                         @else
                             <div class="row">
                                 <form method="post" action="/locations">
-                                    {{ csrf_field() }}
-                                    <label for="name">Name:</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="name"/>
+                                    <div class="form-group">
+                                        {{ csrf_field() }}
+                                        <label for="name">Name:</label>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                               placeholder="name"/>
+                                    </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>

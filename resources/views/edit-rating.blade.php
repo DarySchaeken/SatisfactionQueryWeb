@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
-                         Rating for {{$location->name}}
+                        Rating for {{$location->name}}
                     </div>
 
                     <div class="card-body">
@@ -18,26 +18,35 @@
                                 <form method="post" action="{{ route('ratings.update',[$rating->id]) }}">
                                     {{ csrf_field() }}
                                     {{ method_field('PUT') }}
-                                    <label for="score">Rating:</label>
-                                    <br/>
-                                    @for($i = 1; $i<=10;$i++)
-                                        <label class="radio-inline"><input type="radio" name="score" id="score"
-                                                                           value="{{$i}}"
-                                                                           @if($i == $rating->score)
-                                                                           checked="checked"
-                                                    @endif
-                                            >{{$i}}</label>
-                                    @endfor
-                                    <br/>
-                                    <label for="comment">Comment:</label>
-                                    <br/>
-                                    <textarea class="form-control" id="comment"
-                                              name="comment">{{$rating->comment}}</textarea>
-                                    <br/>
-                                    <input type="hidden" id="location_id" name="location_id" value="{{$location->id}}"/>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                                    <div class="form-group">
+                                        <label for="score">Rating:</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @for($i = 1; $i<=10;$i++)
+                                            <label class="radio"><input type="radio" name="score" id="score"
+                                                                               value="{{$i}}"
+                                                                               @if($i == $rating->score)
+                                                                               checked="checked"
+                                                        @endif
+                                                >{{$i}}</label>
+                                        @endfor
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="comment">Comment:</label>
+                                        <textarea class="form-control" id="comment"
+                                                  name="comment">{{$rating->comment}}</textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="hidden" id="location_id" name="location_id" value="{{$location->id}}"/>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
                                 </form>
                             </div>
+
                             <div class="row">
                                 <form action="{{route ('ratings.destroy_id',[$rating->id])}}" method="post">
                                     {!! csrf_field() !!}

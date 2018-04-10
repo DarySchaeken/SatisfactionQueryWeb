@@ -18,10 +18,16 @@
                                 <form method="post" action="{{route('locations.update', [$location->id])}}">
                                     {{ csrf_field() }}
                                     {{ method_field('PUT') }}
-                                    <label for="name">Name:</label>
-                                    <input type="text" class="form-control" id="name" name="name"
-                                           value="{{ $location->name }}">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                                    <div class="form-group">
+                                        <label for="name">Name:</label>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                               value="{{ $location->name }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
                                 </form>
                             </div>
 
