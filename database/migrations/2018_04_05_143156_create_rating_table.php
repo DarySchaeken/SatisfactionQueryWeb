@@ -21,7 +21,7 @@ class CreateRatingTable extends Migration
             $table->string('token');
             $table->timestamps();
 
-            $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
         });
     }
 
