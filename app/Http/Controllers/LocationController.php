@@ -63,8 +63,12 @@ class LocationController extends Controller
     public function edit($id)
     {
         $location = Location::find($id);
-        $ratings = \App\Rating::all()->where('location_id', $location->id);
-        return view("edit-location", ['location' => $location, 'ratings' => $ratings]);
+        if ($location == null) {
+            return redirect('not-found')->with('not-found', 'location');
+        } else {
+            $ratings = \App\Rating::all()->where('location_id', $location->id);
+            return view("edit-location", ['location' => $location, 'ratings' => $ratings]);
+        }
     }
 
     /**

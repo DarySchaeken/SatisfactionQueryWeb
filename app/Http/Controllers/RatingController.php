@@ -67,7 +67,7 @@ class RatingController extends Controller
         $token = $_GET['token'];
         $rating = Rating::all()->where('token', $token)->first();
         if($rating == null){
-            return view('token-not-found');
+            return redirect('not-found') -> with('not-found','token');
         } else {
             $location = \App\Location::find($rating->location_id);
             return view('edit-rating',['rating' => $rating, 'location' => $location]);

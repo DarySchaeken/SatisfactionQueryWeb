@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <p>
                             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                            Token not found!
+                            {{ session('not-found') }} not found!
                         </p>
                         <a href="{{ url('/locations') }}" class="btn btn-primary" role="button">
                             Go to locations page

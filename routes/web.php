@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () { return view('welcome');});
 
 Auth::routes();
 
@@ -32,3 +30,5 @@ Route::delete('/ratings/destroy_id/{rating_id}', ['uses' => 'RatingController@de
 Route::get('/ratings/edit', ['uses' => 'RatingController@edit'])->name('ratings.edit');
 
 Route::put('/ratings/update/{rating_id}', ['uses' => 'RatingController@update'])->name('ratings.update');
+
+Route::get('not-found', function () { return view('not-found');});
